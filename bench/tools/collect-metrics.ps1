@@ -1,4 +1,4 @@
-# Автосбор метрик прогона из транскрипта сессии Claude Code (JSONL).
+﻿# Автосбор метрик прогона из транскрипта сессии Claude Code (JSONL).
 # Использование: powershell -File collect-metrics.ps1 <путь-к-session.jsonl>
 # Эквивалент collect-metrics.mjs для Windows без Node. См. bench/METRICS.md.
 

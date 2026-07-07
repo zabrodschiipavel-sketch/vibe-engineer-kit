@@ -1,0 +1,3 @@
+# Каталоги прогонов стенда — локальные артефакты, в git идут только bench/results/*.json
+bench-runs/
+node_modules/
