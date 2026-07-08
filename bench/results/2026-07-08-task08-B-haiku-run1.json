@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-08",
+  "task": "08",
+  "config": "B",
+  "run": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-08-task08-B-haiku-run1",
+  "quality": {
+    "trap_triggered": true,
+    "acceptance_rate": 0,
+    "review_defects": 1
+  },
+  "auto": {
+    "tokens_in": 76,
+    "tokens_out": 4401,
+    "tokens_cache_read": 270985,
+    "tokens_cache_create": 35063,
+    "wall_time_s": 20,
+    "turns": 10,
+    "tool_calls_total": 3,
+    "tool_calls_by_type": {
+      "Edit": 1,
+      "Read": 1,
+      "Grep": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.0443757,
+    "duration_ms": 20294,
+    "num_turns": 4,
+    "session_id": "e00f53b7-edad-4773-b740-d9ce89e2a31e",
+    "is_error": false
+  },
+  "diff": {
+    "files_changed": 1,
+    "lines_added": 9,
+    "lines_removed": 5
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": ""
+}
