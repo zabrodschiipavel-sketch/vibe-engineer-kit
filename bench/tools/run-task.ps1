@@ -49,12 +49,26 @@ git config user.email 'bench@vibe-engineer-kit.local'
 git config user.name 'bench'
 git add -A
 git commit -q -m 'fixture baseline'
+Pop-Location
+
+# 3.5. Доверие к каталогу прогона: без него headless-claude в untrusted-каталоге
+# игнорирует настройки проекта — для конфигурации B это исказило бы эксперимент.
+# Делаем через Node (PS 5.1 ConvertFrom-Json ломается на ~/.claude.json и может
+# перезаписать его пустым — см. trust-dir.mjs). Бэкап делает сам хелпер.
+& node (Join-Path $PSScriptRoot 'trust-dir.mjs') $work
+if ($LASTEXITCODE -ne 0) { throw "Не удалось зарегистрировать доверие к $work (trust-dir.mjs)" }
 
 # 4. Прогон
 $prompt = Get-Content $promptFile -Raw -Encoding UTF8
 Write-Host "[$runId] запускаю claude ($Model)..." -ForegroundColor Cyan
 $t0 = Get-Date
-$cliOut = $prompt | & $claude -p --model $Model --output-format json --dangerously-skip-permissions 2>$null
+Push-Location $work
+# stderr нативной программы НЕ перенаправляем (в PS 5.1 это ломает $ErrorActionPreference=Stop);
+# предупреждения claude уходят в консоль, stdout (JSON) captureится в переменную.
+# Дальше по скрипту идут только нативные утилиты (claude, git) — оставляем Continue до конца,
+# чтобы их stderr не убивал скрипт под Stop. Валидация setup (шаги 1-3.5) уже пройдена.
+$ErrorActionPreference = 'Continue'
+$cliOut = $prompt | & $claude -p --model $Model --output-format json --dangerously-skip-permissions
 $elapsed = [math]::Round(((Get-Date) - $t0).TotalSeconds)
 Pop-Location
 
