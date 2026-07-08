@@ -27,7 +27,9 @@ $claude = "$env:USERPROFILE\.local\bin\claude.exe"
 if (-not (Test-Path $claude)) { $claude = 'claude' }
 
 $stamp = Get-Date -Format 'yyyy-MM-dd'
-$runId = "$stamp-task$Task-$Config-run$Run"
+# Короткий тег модели в имени прогона — чтобы результаты разных моделей стенда не сталкивались
+$modelTag = if ($Model -match 'haiku') { 'haiku' } elseif ($Model -match 'sonnet') { 'sonnet' } elseif ($Model -match 'opus') { 'opus' } elseif ($Model -match 'fable') { 'fable' } else { ($Model -replace '[^a-z0-9]', '') }
+$runId = "$stamp-task$Task-$Config-$modelTag-run$Run"
 $work = Join-Path $repoRoot "bench-runs\$runId"
 if (Test-Path $work) { throw "Каталог прогона уже существует: $work (увеличь -Run)" }
 New-Item -ItemType Directory -Force $work | Out-Null
@@ -49,6 +51,8 @@ git config user.email 'bench@vibe-engineer-kit.local'
 git config user.name 'bench'
 git add -A
 git commit -q -m 'fixture baseline'
+$baseSha = (git rev-parse HEAD).Trim()  # база для дифа: сет (config B) заставляет агента
+                                        # самого коммитить, поэтому HEAD~1 недостаточно
 Pop-Location
 
 # 3.5. Доверие к каталогу прогона: без него headless-claude в untrusted-каталоге
@@ -80,9 +84,10 @@ $cliOut | Out-File $cliJsonPath -Encoding utf8
 $cli = $null
 try { $cli = ($cliOut | Out-String) | ConvertFrom-Json } catch { Write-Warning 'Не удалось распарсить JSON от CLI — см. cli-result.json' }
 
-# 5. Диф-метрики
+# 5. Диф-метрики — от БАЗОВОГО коммита до финального состояния (включая коммиты,
+# которые агент сделал сам через /ship). Исключаем cli-result.json (артефакт раннера).
 Push-Location $work
-$numstat = git diff --numstat
+$numstat = git diff $baseSha --numstat -- . ':(exclude)cli-result.json'
 $filesChanged = 0; $added = 0; $removed = 0
 foreach ($line in $numstat) {
     $p = $line -split "`t"
