@@ -1,7 +1,9 @@
 ﻿# Раннер прогона задачи стенда через Claude Code CLI (headless).
 # Использование: powershell -File run-task.ps1 -Task 01 -Config A -Run 1 [-Model claude-sonnet-5]
+#            или: powershell -File run-task.ps1 -Task 09 -Config C -CandidatePath bench\candidates\<name> -Run 1
 #   Task   — номер задачи (каталог в bench/fixtures/)
-#   Config — A (голая модель) | B (текущий сет: CLAUDE.md + .claude из project-template)
+#   Config — A (голая модель) | B (текущий сет: CLAUDE.md + .claude из project-template) | C (кандидат)
+#   CandidatePath — обязателен при Config C: каталог с CLAUDE.md/.claude кандидата (по протоколу EXPERIMENTS.md)
 #   Run    — номер прогона (для имени результата)
 # Что делает: разворачивает фикстуру во временный каталог -> git-бейзлайн ->
 # запускает claude -p с промптом задачи -> собирает метрики (CLI JSON + транскрипт + git diff) ->
@@ -11,9 +13,10 @@
 
 param(
     [Parameter(Mandatory = $true)][string]$Task,
-    [Parameter(Mandatory = $true)][ValidateSet('A', 'B')][string]$Config,
+    [Parameter(Mandatory = $true)][ValidateSet('A', 'B', 'C')][string]$Config,
     [Parameter(Mandatory = $true)][int]$Run,
-    [string]$Model = 'claude-sonnet-5'
+    [string]$Model = 'claude-sonnet-5',
+    [string]$CandidatePath = ''
 )
 
 $ErrorActionPreference = 'Stop'
@@ -22,6 +25,11 @@ $fixture = Join-Path $repoRoot "bench\fixtures\$Task"
 if (-not (Test-Path $fixture)) { throw "Нет фикстуры: $fixture" }
 $promptFile = Join-Path $fixture 'PROMPT.txt'
 if (-not (Test-Path $promptFile)) { throw "Нет PROMPT.txt в фикстуре $Task" }
+if ($Config -eq 'C' -and -not $CandidatePath) { throw "Config C требует -CandidatePath (каталог с CLAUDE.md/.claude кандидата)" }
+if ($Config -eq 'C') {
+    $candidateFull = Join-Path $repoRoot $CandidatePath
+    if (-not (Test-Path (Join-Path $candidateFull 'CLAUDE.md'))) { throw "Не найден CLAUDE.md в $candidateFull" }
+}
 
 $claude = "$env:USERPROFILE\.local\bin\claude.exe"
 if (-not (Test-Path $claude)) { $claude = 'claude' }
@@ -29,7 +37,8 @@ if (-not (Test-Path $claude)) { $claude = 'claude' }
 $stamp = Get-Date -Format 'yyyy-MM-dd'
 # Короткий тег модели в имени прогона — чтобы результаты разных моделей стенда не сталкивались
 $modelTag = if ($Model -match 'haiku') { 'haiku' } elseif ($Model -match 'sonnet') { 'sonnet' } elseif ($Model -match 'opus') { 'opus' } elseif ($Model -match 'fable') { 'fable' } else { ($Model -replace '[^a-z0-9]', '') }
-$runId = "$stamp-task$Task-$Config-$modelTag-run$Run"
+$candSlug = if ($Config -eq 'C') { '-' + (Split-Path $CandidatePath -Leaf) } else { '' }
+$runId = "$stamp-task$Task-$Config$candSlug-$modelTag-run$Run"
 $work = Join-Path $repoRoot "bench-runs\$runId"
 if (Test-Path $work) { throw "Каталог прогона уже существует: $work (увеличь -Run)" }
 New-Item -ItemType Directory -Force $work | Out-Null
@@ -42,6 +51,12 @@ Remove-Item (Join-Path $work 'PROMPT.txt')
 if ($Config -eq 'B') {
     Copy-Item (Join-Path $repoRoot 'project-template\CLAUDE.md') $work
     Copy-Item -Recurse (Join-Path $repoRoot 'project-template\.claude') (Join-Path $work '.claude')
+}
+# 2b. Конфигурация C: кандидат — свой CLAUDE.md/.claude из указанного каталога
+if ($Config -eq 'C') {
+    Copy-Item (Join-Path $candidateFull 'CLAUDE.md') $work
+    $candClaudeDir = Join-Path $candidateFull '.claude'
+    if (Test-Path $candClaudeDir) { Copy-Item -Recurse $candClaudeDir (Join-Path $work '.claude') }
 }
 
 # 3. Git-бейзлайн для дифа

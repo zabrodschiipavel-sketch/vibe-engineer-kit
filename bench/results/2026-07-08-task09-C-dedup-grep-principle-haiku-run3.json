@@ -1,0 +1,51 @@
+{
+  "date": "2026-07-08",
+  "task": "09",
+  "config": "C",
+  "run": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-08-task09-C-dedup-grep-principle-haiku-run3",
+  "quality": {
+    "trap_triggered": false,
+    "acceptance_rate": 100,
+    "review_defects": 0
+  },
+  "auto": {
+    "tokens_in": 190,
+    "tokens_out": 7471,
+    "tokens_cache_read": 785247,
+    "tokens_cache_create": 51865,
+    "wall_time_s": 43,
+    "turns": 26,
+    "tool_calls_total": 11,
+    "tool_calls_by_type": {
+      "Read": 3,
+      "Grep": 2,
+      "Edit": 2,
+      "Glob": 2,
+      "Bash": 2
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.06939640000000001,
+    "duration_ms": 44951,
+    "num_turns": 12,
+    "session_id": "e7401cc5-1dd9-4190-a011-9af2aec600ab",
+    "is_error": false
+  },
+  "diff": {
+    "files_changed": 2,
+    "lines_added": 2,
+    "lines_removed": 2
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": ""
+}
