@@ -1,0 +1,5 @@
+{
+  "name": "bench-12",
+  "type": "module",
+  "scripts": { "test": "node --test" }
+}
