@@ -28,7 +28,7 @@
 powershell -File bench\tools\run-task.ps1 -Task 09 -Config C -CandidatePath bench\candidates\<имя> -Run 1
 ```
 
-`bench/candidates/<имя>/` — копия `CLAUDE.md`/`.claude` из `project-template` с точечным изменением. Победивший кандидат переносится в `project-template` вручную после регрессионной проверки на нескольких других задачах стенда (не только целевой) — см. пример в [experiments/2026-07-08-duplicate-bug-and-task08-n3.md](../experiments/2026-07-08-duplicate-bug-and-task08-n3.md).
+`bench/candidates/<имя>/` — копия `CLAUDE.md`/`.claude` из `project-template` с точечным изменением. Полный список гипотез и их статус — [candidates/README.md](candidates/README.md). Победивший кандидат переносится в `project-template` вручную только после прохождения планки [EXPERIMENTS.md §6](../EXPERIMENTS.md) (N≥10 независимых задач, полная регрессия по стенду, расчёт выгода/цена) — пилотный сигнал на одной задаче для этого недостаточен, см. разбор ошибки в [experiments/2026-07-08-duplicate-bug-and-task08-n3.md](../experiments/2026-07-08-duplicate-bug-and-task08-n3.md).
 
 ## Быстрый прогон (терминальный раннер)
 
