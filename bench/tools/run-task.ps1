@@ -59,6 +59,9 @@ Pop-Location
 if ($LASTEXITCODE -ne 0) { throw "Не удалось зарегистрировать доверие к $work (trust-dir.mjs)" }
 
 # 4. Прогон
+# КРИТИЧНО: PS 5.1 перекодирует stdin пайпа в OEM-кодировку -> кириллица в промпте
+# приходит агенту как '??????'. Форсируем UTF-8 для вывода в native stdin.
+$OutputEncoding = [System.Text.UTF8Encoding]::new($false)
 $prompt = Get-Content $promptFile -Raw -Encoding UTF8
 Write-Host "[$runId] запускаю claude ($Model)..." -ForegroundColor Cyan
 $t0 = Get-Date
