@@ -1,0 +1,51 @@
+{
+  "date": "2026-07-09",
+  "task": "06",
+  "config": "C",
+  "run": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-09-task06-C-density-probe-haiku-run3",
+  "quality": {
+    "trap_triggered": false,
+    "acceptance_rate": 100,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 187,
+    "tokens_out": 6481,
+    "tokens_cache_read": 685860,
+    "tokens_cache_create": 40940,
+    "wall_time_s": 34,
+    "turns": 23,
+    "tool_calls_total": 9,
+    "tool_calls_by_type": {
+      "Read": 3,
+      "Edit": 2,
+      "Glob": 2,
+      "Grep": 1,
+      "Bash": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.0630335,
+    "duration_ms": 35491,
+    "num_turns": 10,
+    "session_id": "e4bb1c4e-b0ce-47a4-a041-efeb94d9e8ec",
+    "is_error": false
+  },
+  "diff": {
+    "files_changed": 2,
+    "lines_added": 9,
+    "lines_removed": 4
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "сьют зелёный, валидация реализована, конфликт разрешён"
+}
