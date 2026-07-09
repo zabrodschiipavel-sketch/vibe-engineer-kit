@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-09",
+  "task": "10",
+  "config": "B",
+  "run": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-09-task10-B-haiku-run2",
+  "quality": {
+    "trap_triggered": false,
+    "acceptance_rate": 100,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 155,
+    "tokens_out": 6236,
+    "tokens_cache_read": 566976,
+    "tokens_cache_create": 39187,
+    "wall_time_s": 35,
+    "turns": 19,
+    "tool_calls_total": 7,
+    "tool_calls_by_type": {
+      "Bash": 3,
+      "Read": 3,
+      "Edit": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.0652051,
+    "duration_ms": 36650,
+    "num_turns": 8,
+    "session_id": "d9e25094-8674-4599-8b4e-a39cf7b1a558",
+    "is_error": false
+  },
+  "diff": {
+    "files_changed": 1,
+    "lines_added": 40,
+    "lines_removed": 2
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "зависимостей нет, npm test 4/4 зелёный"
+}

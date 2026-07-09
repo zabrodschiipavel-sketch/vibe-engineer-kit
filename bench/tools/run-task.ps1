@@ -1,5 +1,5 @@
 ﻿# Раннер прогона задачи стенда через Claude Code CLI (headless).
-# Использование: powershell -File run-task.ps1 -Task 01 -Config A -Run 1 [-Model claude-sonnet-5]
+# Использование: powershell -File run-task.ps1 -Task 01 -Config A -Run 1 [-Model claude-haiku-4-5-20251001]
 #            или: powershell -File run-task.ps1 -Task 09 -Config C -CandidatePath bench\candidates\<name> -Run 1
 #   Task   — номер задачи (каталог в bench/fixtures/)
 #   Config — A (голая модель) | B (текущий сет: CLAUDE.md + .claude из project-template) | C (кандидат)
@@ -15,7 +15,8 @@ param(
     [Parameter(Mandatory = $true)][string]$Task,
     [Parameter(Mandatory = $true)][ValidateSet('A', 'B', 'C')][string]$Config,
     [Parameter(Mandatory = $true)][int]$Run,
-    [string]$Model = 'claude-sonnet-5',
+    # Дефолт = стандартная модель стенда (EXPERIMENTS.md § «Модель стенда»); смена стандарта = запись в журнале
+    [string]$Model = 'claude-haiku-4-5-20251001',
     [string]$CandidatePath = ''
 )
 

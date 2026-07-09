@@ -1,0 +1,51 @@
+{
+  "date": "2026-07-09",
+  "task": "07",
+  "config": "B",
+  "run": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-09-task07-B-haiku-run2",
+  "quality": {
+    "trap_triggered": false,
+    "acceptance_rate": 100,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 124,
+    "tokens_out": 4964,
+    "tokens_cache_read": 338533,
+    "tokens_cache_create": 127641,
+    "wall_time_s": 23,
+    "turns": 15,
+    "tool_calls_total": 6,
+    "tool_calls_by_type": {
+      "Read": 2,
+      "Edit": 1,
+      "Glob": 1,
+      "Bash": 1,
+      "Grep": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.0867117,
+    "duration_ms": 24434,
+    "num_turns": 7,
+    "session_id": "e7e89c8c-d078-48fb-8de5-02c7e53ff6e1",
+    "is_error": false
+  },
+  "diff": {
+    "files_changed": 1,
+    "lines_added": 3,
+    "lines_removed": 2
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "holdout PASS, npm test зелёный"
+}
