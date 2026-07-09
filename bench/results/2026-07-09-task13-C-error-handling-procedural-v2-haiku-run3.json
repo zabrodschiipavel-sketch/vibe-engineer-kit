@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-09",
+  "task": "13",
+  "config": "C",
+  "run": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-09-task13-C-error-handling-procedural-v2-haiku-run3",
+  "quality": {
+    "trap_triggered": false,
+    "acceptance_rate": 100,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 155,
+    "tokens_out": 5671,
+    "tokens_cache_read": 565686,
+    "tokens_cache_create": 39135,
+    "wall_time_s": 38,
+    "turns": 19,
+    "tool_calls_total": 7,
+    "tool_calls_by_type": {
+      "Bash": 3,
+      "Read": 3,
+      "Edit": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.0637671,
+    "duration_ms": 42232,
+    "num_turns": 8,
+    "session_id": "405e8acb-79ae-4ead-b09b-69327a1507fd",
+    "is_error": false
+  },
+  "diff": {
+    "files_changed": 1,
+    "lines_added": 5,
+    "lines_removed": 1
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "holdout PASS: сбой залогирован (console.error в catch), видимые тесты зелёные, приложение не падает"
+}
