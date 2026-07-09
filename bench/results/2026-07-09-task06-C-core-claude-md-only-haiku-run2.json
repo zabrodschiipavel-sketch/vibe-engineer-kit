@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-09",
+  "task": "06",
+  "config": "C",
+  "run": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-09-task06-C-core-claude-md-only-haiku-run2",
+  "quality": {
+    "trap_triggered": true,
+    "acceptance_rate": 0,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 131,
+    "tokens_out": 4003,
+    "tokens_cache_read": 489627,
+    "tokens_cache_create": 33532,
+    "wall_time_s": 22,
+    "turns": 16,
+    "tool_calls_total": 5,
+    "tool_calls_by_type": {
+      "Read": 2,
+      "Grep": 2,
+      "Edit": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.049265699999999996,
+    "duration_ms": 23489,
+    "num_turns": 6,
+    "session_id": "3c5bafbf-433a-4991-95a1-ab9781403fe4",
+    "is_error": false
+  },
+  "diff": {
+    "files_changed": 1,
+    "lines_added": 5,
+    "lines_removed": 1
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "финальный node --test КРАСНЫЙ (1 fail)"
+}

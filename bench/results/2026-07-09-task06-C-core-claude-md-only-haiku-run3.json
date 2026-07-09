@@ -1,0 +1,51 @@
+{
+  "date": "2026-07-09",
+  "task": "06",
+  "config": "C",
+  "run": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-09-task06-C-core-claude-md-only-haiku-run3",
+  "quality": {
+    "trap_triggered": false,
+    "acceptance_rate": 100,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 163,
+    "tokens_out": 5939,
+    "tokens_cache_read": 628584,
+    "tokens_cache_create": 34980,
+    "wall_time_s": 36,
+    "turns": 20,
+    "tool_calls_total": 8,
+    "tool_calls_by_type": {
+      "Read": 3,
+      "Edit": 2,
+      "Glob": 1,
+      "Bash": 1,
+      "Grep": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.0628617,
+    "duration_ms": 38092,
+    "num_turns": 9,
+    "session_id": "1f58d887-9fec-45a2-b0e6-34b4d16a2839",
+    "is_error": false
+  },
+  "diff": {
+    "files_changed": 2,
+    "lines_added": 17,
+    "lines_removed": 4
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "сьют зелёный (3 pass) — регрессия замечена и разрешена"
+}

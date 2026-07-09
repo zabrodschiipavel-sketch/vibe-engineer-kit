@@ -29,7 +29,11 @@ if (-not (Test-Path $promptFile)) { throw "Нет PROMPT.txt в фикстуре
 if ($Config -eq 'C' -and -not $CandidatePath) { throw "Config C требует -CandidatePath (каталог с CLAUDE.md/.claude кандидата)" }
 if ($Config -eq 'C') {
     $candidateFull = Join-Path $repoRoot $CandidatePath
-    if (-not (Test-Path (Join-Path $candidateFull 'CLAUDE.md'))) { throw "Не найден CLAUDE.md в $candidateFull" }
+    # Кандидату достаточно ЛЮБОГО из двух: CLAUDE.md или .claude — изолирующие
+    # конфигурации (только правила / только скиллы) намеренно содержат одно из них.
+    if (-not (Test-Path (Join-Path $candidateFull 'CLAUDE.md')) -and -not (Test-Path (Join-Path $candidateFull '.claude'))) {
+        throw "В $candidateFull нет ни CLAUDE.md, ни .claude — кандидат пуст"
+    }
 }
 
 $claude = "$env:USERPROFILE\.local\bin\claude.exe"
@@ -53,9 +57,10 @@ if ($Config -eq 'B') {
     Copy-Item (Join-Path $repoRoot 'project-template\CLAUDE.md') $work
     Copy-Item -Recurse (Join-Path $repoRoot 'project-template\.claude') (Join-Path $work '.claude')
 }
-# 2b. Конфигурация C: кандидат — свой CLAUDE.md/.claude из указанного каталога
+# 2b. Конфигурация C: кандидат — свой CLAUDE.md/.claude из указанного каталога (каждый — если есть)
 if ($Config -eq 'C') {
-    Copy-Item (Join-Path $candidateFull 'CLAUDE.md') $work
+    $candClaudeMd = Join-Path $candidateFull 'CLAUDE.md'
+    if (Test-Path $candClaudeMd) { Copy-Item $candClaudeMd $work }
     $candClaudeDir = Join-Path $candidateFull '.claude'
     if (Test-Path $candClaudeDir) { Copy-Item -Recurse $candClaudeDir (Join-Path $work '.claude') }
 }
