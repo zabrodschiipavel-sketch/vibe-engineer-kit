@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-09",
+  "task": "06",
+  "config": "C",
+  "run": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-09-task06-C-minimal-bundle-haiku-run1",
+  "quality": {
+    "trap_triggered": true,
+    "acceptance_rate": 0,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 75,
+    "tokens_out": 2150,
+    "tokens_cache_read": 236625,
+    "tokens_cache_create": 30612,
+    "wall_time_s": 16,
+    "turns": 9,
+    "tool_calls_total": 3,
+    "tool_calls_by_type": {
+      "Edit": 1,
+      "Read": 1,
+      "Grep": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.03802029999999999,
+    "duration_ms": 18444,
+    "num_turns": 4,
+    "session_id": "06002dab-3469-4140-baa5-9d919a0db33d",
+    "is_error": false
+  },
+  "diff": {
+    "files_changed": 1,
+    "lines_added": 5,
+    "lines_removed": 1
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "финальный node --test КРАСНЫЙ (1 fail) — регрессия отгружена"
+}
