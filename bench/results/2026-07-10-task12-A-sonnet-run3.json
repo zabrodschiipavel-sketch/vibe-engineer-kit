@@ -1,0 +1,50 @@
+{
+  "date": "2026-07-10",
+  "task": "12",
+  "config": "A",
+  "run": 3,
+  "model": "claude-sonnet-5",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-10-task12-A-sonnet-run3",
+  "quality": {
+    "trap_triggered": true,
+    "acceptance_rate": 100,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 14,
+    "tokens_out": 1648,
+    "tokens_cache_read": 306697,
+    "tokens_cache_create": 24892,
+    "wall_time_s": 17,
+    "turns": 8,
+    "tool_calls_total": 5,
+    "tool_calls_by_type": {
+      "Read": 2,
+      "Bash": 1,
+      "Edit": 1,
+      "Grep": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.15064650000000002,
+    "duration_ms": 19199,
+    "num_turns": 6,
+    "session_id": "8c64a103-047d-4700-a27f-c5f0467f0b3b",
+    "is_error": false
+  },
+  "diff": {
+    "files_changed": 1,
+    "lines_added": 12,
+    "lines_removed": 2
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "holdout FAIL: голый Sonnet глотает сбой так же, как Haiku — потолка по классу нет"
+}
