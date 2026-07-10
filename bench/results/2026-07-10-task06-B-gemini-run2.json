@@ -1,0 +1,56 @@
+{
+  "date": "2026-07-10",
+  "task": "06",
+  "config": "B",
+  "run": 2,
+  "model": "gemini-3.1-flash-lite",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-10-task06-B-gemini-run2",
+  "quality": {
+    "trap_triggered": false,
+    "acceptance_rate": 100,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 1012651,
+    "tokens_out": 3490,
+    "tokens_cache_read": 862811,
+    "tokens_cache_create": 0,
+    "wall_time_s": 97,
+    "turns": 37,
+    "tool_calls_total": 16,
+    "tool_calls_by_type": {
+      "Bash": 4,
+      "Read": 4,
+      "TaskUpdate": 2,
+      "Edit": 2,
+      "Skill": 1,
+      "Write": 1,
+      "TaskCreate": 1,
+      "Grep": 1
+    },
+    "human_messages": 1
+  },
+  "cli": {
+    "total_cost_usd": 2.5796469999999996,
+    "duration_ms": 97118,
+    "num_turns": 18,
+    "session_id": "a90650d2-118a-4d2b-ace2-b9050ab734c1",
+    "is_error": false
+  },
+  "legs": 1,
+  "cli_extra": null,
+  "diff": {
+    "files_changed": 3,
+    "lines_added": 18,
+    "lines_removed": 7
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "Сьют зелёный. Gemini-линия, прогон из основного репо."
+}

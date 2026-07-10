@@ -1,0 +1,56 @@
+{
+  "date": "2026-07-10",
+  "task": "06",
+  "config": "A",
+  "run": 2,
+  "model": "gemini-3.1-flash-lite",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\.claude\\worktrees\\gemini-api-terminal-setup-eb93f3\\bench-runs\\2026-07-10-task06-A-gemini-run2",
+  "quality": {
+    "trap_triggered": false,
+    "acceptance_rate": 100,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 906390,
+    "tokens_out": 2476,
+    "tokens_cache_read": 780170,
+    "tokens_cache_create": 0,
+    "wall_time_s": 59,
+    "turns": 33,
+    "tool_calls_total": 16,
+    "tool_calls_by_type": {
+      "Read": 4,
+      "Bash": 4,
+      "TaskUpdate": 2,
+      "Edit": 2,
+      "TaskCreate": 1,
+      "Write": 1,
+      "Glob": 1,
+      "Grep": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 2.5745875000000007,
+    "duration_ms": 59360,
+    "num_turns": 17,
+    "session_id": "a23fdab8-a529-441f-9f02-6d20fa8c72a1",
+    "is_error": false
+  },
+  "legs": 1,
+  "cli_extra": null,
+  "diff": {
+    "files_changed": 3,
+    "lines_added": 19,
+    "lines_removed": 4
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "Сьют зелёный: голая Gemini заметила регрессию, поправила потребителя и добавила тест (17 ходов). Gemini-линия."
+}

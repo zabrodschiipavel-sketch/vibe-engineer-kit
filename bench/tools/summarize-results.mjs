@@ -30,10 +30,10 @@ const groups = new Map(); // key: task|config|candidate|model
 for (const f of readdirSync(resultsDir).filter((f) => f.endsWith('.json'))) {
   let r;
   try { r = JSON.parse(readFileSync(join(resultsDir, f), 'utf8')); } catch { console.error(`пропуск (битый JSON): ${f}`); continue; }
-  const model = /haiku/.test(r.model) ? 'haiku' : /sonnet/.test(r.model) ? 'sonnet' : /fable/.test(r.model) ? 'fable' : r.model;
+  const model = /haiku/.test(r.model) ? 'haiku' : /sonnet/.test(r.model) ? 'sonnet' : /fable/.test(r.model) ? 'fable' : /gemini/.test(r.model) ? 'gemini' : r.model;
   if (modelFilter && model !== modelFilter) continue;
   if (configFilter && !configFilter.includes(r.config)) continue;
-  const candidate = r.config === 'C' ? (f.match(/-C-(.+?)-(?:haiku|sonnet|opus|fable)-run/)?.[1] ?? '?') : '';
+  const candidate = r.config === 'C' ? (f.match(/-C-(.+?)-(?:haiku|sonnet|opus|fable|gemini)-run/)?.[1] ?? '?') : '';
   const key = `${r.task}|${r.config}${candidate ? ':' + candidate : ''}|${model}`;
   if (!groups.has(key)) groups.set(key, { task: r.task, config: r.config + (candidate ? ':' + candidate : ''), model, runs: 0, trap: 0, trapUnknown: 0, costs: [], turns: [] });
   const g = groups.get(key);

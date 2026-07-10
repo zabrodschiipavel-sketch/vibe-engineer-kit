@@ -41,10 +41,17 @@ if (-not (Test-Path $claude)) { $claude = 'claude' }
 
 $stamp = Get-Date -Format 'yyyy-MM-dd'
 # Короткий тег модели в имени прогона — чтобы результаты разных моделей стенда не сталкивались
-$modelTag = if ($Model -match 'haiku') { 'haiku' } elseif ($Model -match 'sonnet') { 'sonnet' } elseif ($Model -match 'opus') { 'opus' } elseif ($Model -match 'fable') { 'fable' } else { ($Model -replace '[^a-z0-9]', '') }
+$modelTag = if ($Model -match 'haiku') { 'haiku' } elseif ($Model -match 'sonnet') { 'sonnet' } elseif ($Model -match 'opus') { 'opus' } elseif ($Model -match 'fable') { 'fable' } elseif ($Model -match 'gemini') { 'gemini' } else { ($Model -replace '[^a-z0-9]', '') }
 $candSlug = if ($Config -eq 'C') { '-' + (Split-Path $CandidatePath -Leaf) } else { '' }
 $runId = "$stamp-task$Task-$Config$candSlug-$modelTag-run$Run"
-$work = Join-Path $repoRoot "bench-runs\$runId"
+# Claude Code НЕ подгружает CLAUDE.md/скиллы, если cwd вложен в каталог .claude
+# (обнаружено 2026-07-10: прогоны из harness-воктри .claude\worktrees\* шли как
+# конфигурация A даже при подложенном сете). Каталоги прогонов выносим из-под .claude.
+$runsRoot = Join-Path $repoRoot 'bench-runs'
+if ($repoRoot -match '\\\.claude\\') {
+    $runsRoot = Join-Path ($repoRoot -split '\\\.claude\\')[0] 'bench-runs'
+}
+$work = Join-Path $runsRoot $runId
 if (Test-Path $work) { throw "Каталог прогона уже существует: $work (увеличь -Run)" }
 New-Item -ItemType Directory -Force $work | Out-Null
 
