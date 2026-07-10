@@ -48,9 +48,10 @@ $work = Join-Path $repoRoot "bench-runs\$runId"
 if (Test-Path $work) { throw "Каталог прогона уже существует: $work (увеличь -Run)" }
 New-Item -ItemType Directory -Force $work | Out-Null
 
-# 1. Фикстура (без PROMPT.txt — агент не должен видеть мета-файлы стенда)
+# 1. Фикстура (без PROMPT.txt/ANSWERS.txt — агент не должен видеть мета-файлы стенда)
 Copy-Item -Recurse "$fixture\*" $work
 Remove-Item (Join-Path $work 'PROMPT.txt')
+if (Test-Path (Join-Path $work 'ANSWERS.txt')) { Remove-Item (Join-Path $work 'ANSWERS.txt') }
 
 # 2. Конфигурация B: сет из project-template (без .mcp.json — MCP в стенде не участвует)
 if ($Config -eq 'B') {
@@ -105,10 +106,51 @@ $cliOut | Out-File $cliJsonPath -Encoding utf8
 $cli = $null
 try { $cli = ($cliOut | Out-String) | ConvertFrom-Json } catch { Write-Warning 'Не удалось распарсить JSON от CLI — см. cli-result.json' }
 
+# 4b. Протокол автоответчика для интерактивных задач (ROADMAP v0.3).
+# Пока финальное сообщение агента содержит вопрос или ожидание одобрения — продолжаем
+# сессию (claude -p --resume), максимум до $MaxLegs легов:
+#   лег 2 — ANSWERS.txt фикстуры («Ответы оператора» из карточки), если есть;
+#   лег 3+ — стандартное одобрение (по README стенда: на непокрытое — «реши сам»).
+# Ответы уходят одним сообщением на лег (компромисс: не диалог по одному вопросу).
+# Прогоны с legs>1 несравнимы с прогонами без автоответчика — поле legs пишется в результат.
+$MaxLegs = 3
+$approveText = 'Одобряю, замечаний нет. Реализуй и доведи задачу до конца; по непокрытым мелочам решай сам и явно называй допущения.'
+$continuePattern = '\?|одобр|подтверд|соглас|жд(и|у)|скажи|approve|confirm|proceed'
+$legs = 1
+$cliExtra = @()
+$lastResult = if ($cli) { [string]$cli.result } else { '' }
+$lastSession = if ($cli) { $cli.session_id } else { $null }
+$answersFile = Join-Path $fixture 'ANSWERS.txt'
+$answersSent = $false
+while ($legs -lt $MaxLegs -and $lastSession -and $cli -and -not $cli.is_error -and (Test-Path $answersFile) -and ($lastResult -match $continuePattern)) {
+    $reply = if (-not $answersSent) { $answersSent = $true; Get-Content $answersFile -Raw -Encoding UTF8 } else { $approveText }
+    $legs++
+    Write-Host "[$runId] агент ждёт ответа — лег ${legs}: отправляю $(if ($legs -eq 2) {'ответы оператора'} else {'одобрение'})..." -ForegroundColor Cyan
+    Push-Location $work
+    $cliOutN = $reply | & $claude -p --resume $lastSession --model $Model --output-format json --dangerously-skip-permissions
+    Pop-Location
+    $cliOutN | Out-File (Join-Path $work "cli-result-$legs.json") -Encoding utf8
+    $cliN = $null
+    try { $cliN = ($cliOutN | Out-String) | ConvertFrom-Json } catch { Write-Warning "Лег ${legs}: не удалось распарсить JSON"; break }
+    $cliExtra += [ordered]@{
+        leg            = $legs
+        total_cost_usd = $cliN.total_cost_usd
+        num_turns      = $cliN.num_turns
+        session_id     = $cliN.session_id
+        is_error       = $cliN.is_error
+    }
+    $lastResult = [string]$cliN.result
+    if ($cliN.session_id) { $lastSession = $cliN.session_id }
+    if ($cliN.is_error) { break }
+}
+$elapsed = [math]::Round(((Get-Date) - $t0).TotalSeconds)
+
 # 5. Диф-метрики — от БАЗОВОГО коммита до финального состояния (включая коммиты,
-# которые агент сделал сам через /ship). Исключаем cli-result.json (артефакт раннера).
+# которые агент сделал сам через /ship). Сначала коммитим состояние (иначе новые
+# НЕотслеживаемые файлы агента не попадают в numstat), исключаем артефакты раннера.
 Push-Location $work
-$numstat = git diff $baseSha --numstat -- . ':(exclude)cli-result.json'
+git add -A; git commit -q -m 'agent result' 2>$null
+$numstat = git diff $baseSha HEAD --numstat -- . ':(exclude)cli-result*.json'
 $filesChanged = 0; $added = 0; $removed = 0
 foreach ($line in $numstat) {
     $p = $line -split "`t"
@@ -118,7 +160,6 @@ foreach ($line in $numstat) {
         if ($p[1] -match '^\d+$') { $removed += [int]$p[1] }
     }
 }
-git add -A; git commit -q -m 'agent result' 2>$null
 Pop-Location
 
 # 6. Метрики из транскрипта
@@ -149,6 +190,8 @@ $result = [ordered]@{
                               num_turns      = $cli.num_turns
                               session_id     = $cli.session_id
                               is_error       = $cli.is_error } } else { $null }
+    legs                 = $legs
+    cli_extra            = if ($cliExtra.Count) { $cliExtra } else { $null }
     diff                 = [ordered]@{ files_changed = $filesChanged; lines_added = $added; lines_removed = $removed }
     manual               = [ordered]@{ context_tax_tokens = $null; clarifying_questions = $null; interventions = $null; offtask_lines = $null }
     notes                = ''
@@ -160,8 +203,12 @@ $resultPath = Join-Path $resultsDir "$runId.json"
 $result | ConvertTo-Json -Depth 6 | Out-File $resultPath -Encoding utf8
 
 Write-Host ""
-Write-Host "[$runId] готово за ${elapsed}s" -ForegroundColor Green
-if ($cli) { Write-Host ("  cost: {0}$  turns: {1}" -f $cli.total_cost_usd, $cli.num_turns) }
+Write-Host "[$runId] готово за ${elapsed}s (legs: $legs)" -ForegroundColor Green
+if ($cli) {
+    $costTotal = $cli.total_cost_usd; $turnsTotal = $cli.num_turns
+    foreach ($e in $cliExtra) { $costTotal += $e.total_cost_usd; $turnsTotal += $e.num_turns }
+    Write-Host ("  cost: {0}$  turns: {1}" -f $costTotal, $turnsTotal)
+}
 Write-Host "  диф: $filesChanged файлов, +$added/-$removed строк"
 Write-Host "  результат: $resultPath"
 Write-Host "  каталог прогона (для оценки ловушки): $work"

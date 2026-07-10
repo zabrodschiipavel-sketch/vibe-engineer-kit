@@ -1,0 +1,51 @@
+{
+  "date": "2026-07-10",
+  "task": "03",
+  "config": "A",
+  "run": 11,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-10-task03-A-haiku-run11",
+  "quality": {
+    "trap_triggered": true,
+    "acceptance_rate": 67,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 83,
+    "tokens_out": 2619,
+    "tokens_cache_read": 281632,
+    "tokens_cache_create": 27664,
+    "wall_time_s": 15,
+    "turns": 10,
+    "tool_calls_total": 3,
+    "tool_calls_by_type": {
+      "Glob": 1,
+      "Edit": 1,
+      "Read": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.0360366,
+    "duration_ms": 16852,
+    "num_turns": 4,
+    "session_id": "a9bea00c-7102-4deb-8898-f029e5e5cb3c",
+    "is_error": false
+  },
+  "legs": 1,
+  "cli_extra": null,
+  "diff": {
+    "files_changed": 1,
+    "lines_added": 8,
+    "lines_removed": 0
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "legs=1: молча закодил без вопросов (throw+regex разумные, но допущения не названы)"
+}
