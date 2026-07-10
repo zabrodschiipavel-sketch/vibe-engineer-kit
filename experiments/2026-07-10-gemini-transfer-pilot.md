@@ -49,5 +49,6 @@
 
 - [x] Раннер: фикс воктри-бага + тег gemini (run-task.ps1, summarize-results.mjs)
 - [x] Сырые результаты в bench/results (14 прогонов)
-- [ ] Строчка в ROADMAP при следующем ретро; кандидат «/spec, устойчивый к эхо процедуры» — оформить при решении гонять Gemini дальше
+- [x] Кандидат [spec-echo-resistant](../bench/candidates/spec-echo-resistant/) оформлен (2026-07-10, 📝): анти-эхо переформулировка Шага 1 /spec
+- [ ] Строчка в ROADMAP при следующем ретро
 - [ ] dedup-grep-principle: кросс-модельный сигнал учесть при батарее §6

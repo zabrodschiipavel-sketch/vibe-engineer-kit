@@ -1,0 +1,63 @@
+{
+  "$comment": "Настройки вайбинженера: безопасное — без промптов, разрушительное — под запретом/вопросом. Секция _disabled_hooks — заготовка автоформатирования: переименуй её в hooks и подставь команду своего форматтера (prettier/ruff/gofmt).",
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git stash list:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run typecheck:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx eslint:*)",
+      "Bash(npx prettier --check:*)",
+      "Bash(pytest:*)",
+      "Bash(ruff check:*)",
+      "Bash(mypy:*)",
+      "Bash(cargo check:*)",
+      "Bash(cargo test:*)",
+      "Bash(cargo clippy:*)",
+      "Bash(go test:*)",
+      "Bash(go vet:*)",
+      "Bash(go build:*)"
+    ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(git rebase:*)",
+      "Bash(npm install:*)",
+      "Bash(pip install:*)"
+    ],
+    "deny": [
+      "Bash(rm -rf:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean -fd:*)",
+      "Bash(git checkout -- .:*)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(**/secrets/**)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)"
+    ]
+  },
+  "_disabled_hooks": {
+    "$comment": "Автоформат после каждой правки файла. Переименуй _disabled_hooks -> hooks и замени команду под свой стек: JS/TS: npx prettier --write ; Python: ruff format ; Go: gofmt -w. Пути изменённых файлов приходят хук-скрипту JSON-ом на stdin (поле tool_input.file_path).",
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx prettier --write --ignore-unknown \"$(jq -r '.tool_input.file_path')\""
+          }
+        ]
+      }
+    ]
+  }
+}
