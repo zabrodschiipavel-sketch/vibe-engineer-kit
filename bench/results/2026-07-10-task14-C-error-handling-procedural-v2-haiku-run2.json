@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-10",
+  "task": "14",
+  "config": "C",
+  "run": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-10-task14-C-error-handling-procedural-v2-haiku-run2",
+  "quality": {
+    "trap_triggered": false,
+    "acceptance_rate": 100,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 123,
+    "tokens_out": 5829,
+    "tokens_cache_read": 441513,
+    "tokens_cache_create": 40013,
+    "wall_time_s": 34,
+    "turns": 15,
+    "tool_calls_total": 6,
+    "tool_calls_by_type": {
+      "Read": 3,
+      "Bash": 2,
+      "Edit": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.057484299999999995,
+    "duration_ms": 35410,
+    "num_turns": 7,
+    "session_id": "53be3678-882d-4f6d-ac91-9c0b9032b1fe",
+    "is_error": false
+  },
+  "diff": {
+    "files_changed": 1,
+    "lines_added": 5,
+    "lines_removed": 1
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "holdout PASS: сбой наблюдаем — правило v2 перенеслось на новую структуру"
+}
