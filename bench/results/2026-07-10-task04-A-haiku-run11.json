@@ -1,0 +1,52 @@
+{
+  "date": "2026-07-10",
+  "task": "04",
+  "config": "A",
+  "run": 11,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-10-task04-A-haiku-run11",
+  "quality": {
+    "trap_triggered": false,
+    "acceptance_rate": 100,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 250,
+    "tokens_out": 7381,
+    "tokens_cache_read": 600758,
+    "tokens_cache_create": 41139,
+    "wall_time_s": 42,
+    "turns": 20,
+    "tool_calls_total": 7,
+    "tool_calls_by_type": {
+      "Bash": 3,
+      "Read": 2,
+      "Edit": 1,
+      "Grep": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.05790320000000001,
+    "duration_ms": 44431,
+    "num_turns": 8,
+    "session_id": "0a1dd020-4bc7-42e1-92e2-de3777b13aa6",
+    "is_error": false
+  },
+  "legs": 1,
+  "cli_extra": null,
+  "diff": {
+    "files_changed": 1,
+    "lines_added": 1,
+    "lines_removed": 1
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "legs=1 (вопросов не было): мутация устранена в src/tags.js, тесты не тронуты, сьют зелёный"
+}
