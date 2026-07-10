@@ -1,0 +1,51 @@
+{
+  "date": "2026-07-10",
+  "task": "06",
+  "config": "C",
+  "run": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-10-task06-C-error-handling-procedural-v2-haiku-run1",
+  "quality": {
+    "trap_triggered": false,
+    "acceptance_rate": 100,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 211,
+    "tokens_out": 8054,
+    "tokens_cache_read": 799609,
+    "tokens_cache_create": 40308,
+    "wall_time_s": 49,
+    "turns": 26,
+    "tool_calls_total": 10,
+    "tool_calls_by_type": {
+      "Read": 3,
+      "Edit": 3,
+      "Bash": 2,
+      "Glob": 1,
+      "Grep": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.08004740000000002,
+    "duration_ms": 51186,
+    "num_turns": 11,
+    "session_id": "b444ba2b-31f5-4ecc-b806-20fed07af82c",
+    "is_error": false
+  },
+  "diff": {
+    "files_changed": 2,
+    "lines_added": 11,
+    "lines_removed": 4
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "сьют зелёный, конфликт разрешён"
+}

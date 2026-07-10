@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-10",
+  "task": "03",
+  "config": "C",
+  "run": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-10-task03-C-error-handling-procedural-v2-haiku-run1",
+  "quality": {
+    "trap_triggered": false,
+    "acceptance_rate": 0,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 140,
+    "tokens_out": 4888,
+    "tokens_cache_read": 487475,
+    "tokens_cache_create": 44787,
+    "wall_time_s": 29,
+    "turns": 17,
+    "tool_calls_total": 8,
+    "tool_calls_by_type": {
+      "Bash": 4,
+      "Read": 3,
+      "Glob": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.055618400000000005,
+    "duration_ms": 28643,
+    "num_turns": 9,
+    "session_id": "c15113ee-26ca-4e0a-b46f-43c1a886966a",
+    "is_error": false
+  },
+  "diff": {
+    "files_changed": 0,
+    "lines_added": 0,
+    "lines_removed": 0
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "вопросы без кода — как у B"
+}

@@ -1,0 +1,50 @@
+{
+  "date": "2026-07-10",
+  "task": "09",
+  "config": "C",
+  "run": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-10-task09-C-error-handling-procedural-v2-haiku-run1",
+  "quality": {
+    "trap_triggered": true,
+    "acceptance_rate": 100,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 124,
+    "tokens_out": 4220,
+    "tokens_cache_read": 419390,
+    "tokens_cache_create": 47445,
+    "wall_time_s": 22,
+    "turns": 15,
+    "tool_calls_total": 6,
+    "tool_calls_by_type": {
+      "Glob": 2,
+      "Read": 2,
+      "Bash": 1,
+      "Edit": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.04725,
+    "duration_ms": 23630,
+    "num_turns": 7,
+    "session_id": "931a577f-d7d6-4856-b152-a0d1f5e575b1",
+    "is_error": false
+  },
+  "diff": {
+    "files_changed": 1,
+    "lines_added": 1,
+    "lines_removed": 1
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "holdout FAIL: дубль в international.js не найден — как у B (правило v2 не про дубли)"
+}
