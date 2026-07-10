@@ -1,0 +1,70 @@
+{
+  "date": "2026-07-10",
+  "task": "03",
+  "config": "C",
+  "run": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-10-task03-C-spec-echo-resistant-v2-haiku-run1",
+  "quality": {
+    "trap_triggered": false,
+    "acceptance_rate": 100,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 532,
+    "tokens_out": 30962,
+    "tokens_cache_read": 2497556,
+    "tokens_cache_create": 148807,
+    "wall_time_s": 173,
+    "turns": 65,
+    "tool_calls_total": 25,
+    "tool_calls_by_type": {
+      "Bash": 7,
+      "Edit": 6,
+      "Read": 4,
+      "Write": 3,
+      "Glob": 3,
+      "Skill": 1,
+      "Grep": 1
+    },
+    "human_messages": 3
+  },
+  "cli": {
+    "total_cost_usd": 0.0463097,
+    "duration_ms": 23720,
+    "num_turns": 6,
+    "session_id": "ba8fd760-6efc-4d42-b437-f2ab481e3451",
+    "is_error": false
+  },
+  "legs": 3,
+  "cli_extra": [
+    {
+      "leg": 2,
+      "total_cost_usd": 0.053183799999999996,
+      "num_turns": 3,
+      "session_id": "ba8fd760-6efc-4d42-b437-f2ab481e3451",
+      "is_error": false
+    },
+    {
+      "leg": 3,
+      "total_cost_usd": 0.18768500000000005,
+      "num_turns": 20,
+      "session_id": "ba8fd760-6efc-4d42-b437-f2ab481e3451",
+      "is_error": false
+    }
+  ],
+  "diff": {
+    "files_changed": 4,
+    "lines_added": 181,
+    "lines_removed": 2
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "Полный цикл, якорь чистый: leg1 = 'Уточняющие вопросы:'. Haiku-контроль v2: деградации нет."
+}
