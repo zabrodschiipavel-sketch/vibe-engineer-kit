@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-09",
+  "task": "15",
+  "config": "A",
+  "run": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "effort": "medium",
+  "claude_code_version": "2.1.202 (Claude Code)",
+  "workdir": "C:\\Users\\user\\vibe-engineer-kit\\bench-runs\\2026-07-09-task15-A-haiku-run1",
+  "quality": {
+    "trap_triggered": true,
+    "acceptance_rate": 100,
+    "review_defects": null
+  },
+  "auto": {
+    "tokens_in": 115,
+    "tokens_out": 4491,
+    "tokens_cache_read": 418108,
+    "tokens_cache_create": 29619,
+    "wall_time_s": 30,
+    "turns": 14,
+    "tool_calls_total": 5,
+    "tool_calls_by_type": {
+      "Bash": 2,
+      "Read": 2,
+      "Edit": 1
+    },
+    "human_messages": 0
+  },
+  "cli": {
+    "total_cost_usd": 0.050017099999999995,
+    "duration_ms": 31728,
+    "num_turns": 6,
+    "session_id": "bc0d4a5f-e888-435f-850b-61175513b2d9",
+    "is_error": false
+  },
+  "diff": {
+    "files_changed": 1,
+    "lines_added": 6,
+    "lines_removed": 2
+  },
+  "manual": {
+    "context_tax_tokens": null,
+    "clarifying_questions": null,
+    "interventions": null,
+    "offtask_lines": null
+  },
+  "notes": "holdout FAIL: пустой catch в тике — сбои воркера бесследны"
+}
